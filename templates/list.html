@@ -1,0 +1,33 @@
+<!doctype html>
+<head>
+    <title>Super Sprinter 3000</title>
+</head>
+
+<body>
+    <p><h1> User Story manager</h1></p>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Story Title</th>
+            <th>User Story</th>
+            <th>Acceptance Criteria</th>
+            <th>Business Value</th>
+            <th>Estimation</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+        {% for story in story_list %}
+        <tr>
+            <td>{{story.id}}</td>
+            <td>{{story.title}}</td>
+            <td>{{story.long_desc}}</td>
+            <td>{{story.accept}}</td>
+            <td>{{story.value}}</td>
+            <td>{{story.estim}}</td>
+            <td>{{story.status}}</td>
+            <td>buttony buttony</td>
+        </tr>
+        {% endfor%}
+    </table>
+
+</body>
