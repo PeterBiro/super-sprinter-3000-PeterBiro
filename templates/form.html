@@ -1,0 +1,31 @@
+<!doctype html>
+    <head>
+        <title>Super Sprinter 3000 {{title}}</title>
+    </head>
+
+    <body>
+        <h1> User Story manager {{title}}</h1>
+        <form action="main.py" method="POST">
+            <p>Story Title<br>
+            <input type="text" name="story.title" value={{story.title}}></p>
+            <p>User Story<br>
+            <textarea name="story.long_desc" rows="5" cols="80">{{story.long_desc}}</textarea></p>
+            <p>Acceptance criteria<br>
+            <textarea name="story.accept" rows="5" cols="80">{{story.accept}}</textarea></p>
+            <p>Business value<br>
+            <input type="number" name="story.value" min="100" max="1500" step="100" value={{story.value}}></p>
+            <p>Estimation (h)<br>
+            <input type="number" name="story.estimation" min="0.5" max="40" step="0.5" value={{story.estimation}}></p>
+            <p>Status<br>
+            <select name="story.status">
+                <option>Planning</option>
+                <option>TO DO</option>
+                <option>In Progress</option>
+                <option>Review</option>
+                <option>Done</option>
+            </select></p>
+            <input type="submit">
+            
+        </form>
+
+    </body>
