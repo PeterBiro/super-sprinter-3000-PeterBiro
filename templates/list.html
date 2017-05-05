@@ -1,11 +1,25 @@
 <!doctype html>
 <head>
     <title>Super Sprinter 3000</title>
+    <style>
+        table, th, td {
+                        border: 1px solid black;
+                        border-collapse: collapse;
+                        }
+    </style>
 </head>
 
 <body>
     <p><h1> User Story manager</h1></p>
-    <table>
+    <table border="1">
+        <col width="30">
+        <col width="150">
+        <col width="200">
+        <col width="200">
+        <col width="50">
+        <col width="50">
+        <col width="50">
+        <col width="100">
         <tr>
             <th>ID</th>
             <th>Story Title</th>
@@ -25,7 +39,9 @@
             <td>{{story.value}}</td>
             <td>{{story.estim}}</td>
             <td>{{story.status}}</td>
-            <td>buttony buttony</td>
+            <td><img src="{{ url_for('static', filename = "Edit.png") }}" alt="Edit Story">
+                <img src="{{ url_for('static', filename = "Delete.png") }}" alt="Delete Story">
+            </td>
         </tr>
         {% endfor%}
     </table>
