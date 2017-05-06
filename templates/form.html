@@ -1,13 +1,14 @@
 <!doctype html>
 <head>
-    <title>Super Sprinter 3000 {{title}}</title>
+    <title>Super Sprinter 3000 - {{title}}</title>
 </head>
 
 <body>
-    <h1> User Story manager {{title}}</h1>
-    <form action="main.py" method="POST">
+    <h1> User Story manager - {{title}}</h1>
+    <form method="POST" action="/story/{{ story.id }}">
+        <p> Sory ID:<input type="text" name="story.id" value="{{ story.id }}" maxlength="5" readonly></p>
         <p>Story Title<br>
-        <input type="text" name="story.title" value="{{ story.title }}"></p>
+        <input type="text" name="story.title" id="story.title" value="{{ story.title }}"></p>
         <p>User Story<br>
         <textarea name="story.long_desc" rows="5" cols="80">{{ story.long_desc }}</textarea></p>
         <p>Acceptance criteria<br>
@@ -24,6 +25,6 @@
             <option>Review</option>
             <option>Done</option>
         </select></p>
-        <input type="submit">        
+        <input type="submit" value="{{ title }}">        
         </form
 </body>

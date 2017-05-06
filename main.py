@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect
 app = Flask(__name__)
 
 
@@ -31,10 +31,24 @@ def load_stories_from_file(file_name):
     return story_list
 
 
+def save_stories_to_file(file_name, story_list):
+    with open(file_name, "w") as file:
+        for story in story_list:
+            row = ";".join([str(story.id),
+                            story.title,
+                            story.long_desc,
+                            story.accept,
+                            str(story.value),
+                            story.estim,
+                            story.status
+                            ])
+            file.write(row + "\n")
+
+
 @app.route("/")
 @app.route("/list/")
 @app.route("/list/del@id=<int:id>")
-def list():
+def list_of_stories():
     if request.method == "GET":
         story_list = load_stories_from_file("stories.csv")
         return render_template("list.html", story_list=story_list)
@@ -42,16 +56,29 @@ def list():
 
 @app.route("/story/", methods=["GET", "POST"])
 def add_new_story():
-    if request.method == "GET":
+    if request.method == "POST":
+        pass
+    else:
         story = Story_class(None, None, None, None, None, None, None)
         return render_template("form.html", title="Add new Story", story=story)
-    elif request.method == "POST":
-        return ("I am doing it...")
 
 
 @app.route("/story/<int:story_id>", methods=["GET", "POST"])
 def edit_story(story_id):
-    if request.method == "GET":
+    if request.method == "POST":
+        story_list = load_stories_from_file("stories.csv")
+        for i in range(len(story_list)):
+            if story_list[i].id == request.form["story.id"]:
+                break
+        story_list[i].title = request.form["story.title"]
+        story_list[i].long_desc = request.form["story.long_desc"]
+        story_list[i].accept = request.form["story.accept"]
+        story_list[i].value = request.form["story.value"]
+        story_list[i].estim = request.form["story.estim"]
+        story_list[i].status = request.form["story.status"]
+        save_stories_to_file("stories.csv", story_list)
+        return redirect("/", code=302)
+    else:
         story_list = load_stories_from_file("stories.csv")
         story = [x for x in story_list if x.id == story_id][0]
         return render_template("form.html", title="Edit Story", story=story)
