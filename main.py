@@ -33,11 +33,8 @@ def load_stories_from_file(file_name):
 
 @app.route("/")
 @app.route("/list/")
-@app.route("/list/del@id=<id>")
+@app.route("/list/del@id=<int:id>")
 def list():
-    if request.method == "POST":
-        if request.form["Add new"] == "Add new Story":
-            return add_new_story()
     if request.method == "GET":
         story_list = load_stories_from_file("stories.csv")
         return render_template("list.html", story_list=story_list)
@@ -52,8 +49,16 @@ def add_new_story():
         return ("I am doing it...")
 
 
+@app.route("/story/<int:story_id>", methods=["GET", "POST"])
+def edit_story(story_id):
+    if request.method == "GET":
+        story_list = load_stories_from_file("stories.csv")
+        story = [x for x in story_list if x.id == story_id][0]
+        return render_template("form.html", title="Edit Story", story=story)
+
+
 def main():
     pass
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)

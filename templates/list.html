@@ -11,7 +11,7 @@
 
 <body>
     <p><h1> User Story manager</h1></p>
-    <p><form action="/story"><input type="submit" name="Add new" ></form></p>
+    <p><a href="/story"><button type="button">Add new Story</button> </a></p>
     <table border="1">
         <col width="30">
         <col width="150">
@@ -40,8 +40,8 @@
             <td>{{story.value}}</td>
             <td>{{story.estim}}</td>
             <td>{{story.status}}</td>
-            <td><img src="{{ url_for('static', filename = "Edit.png") }}" alt="Edit Story" width="25">
-                <img src="{{ url_for('static', filename = "Delete.png") }}" alt="Delete Story" width="25" align="RIGHT">
+            <td><a href="/story/{{story.id}}" > <img src="{{ url_for('static', filename = "Edit.png") }}" alt="Edit Story" width="25"></a>
+                <a href="/story/del@id={{story.id}}" ><img src="{{ url_for('static', filename = "Delete.png") }}" alt="Delete Story" width="25" align="right"></a>
             </td>
         </tr>
         {% endfor%}
