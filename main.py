@@ -65,10 +65,12 @@ def list_of_stories():
         return render_template("list.html", story_list=story_list)
 
 
-@app.route("/list/del@id=<int:id>")
+@app.route("/story/del@id=<int:id>")
 def delete_story(id):
     story_list = load_stories_from_file("stories.csv")
-
+    story_list.pop(get_index_from_id(story_list, id))
+    save_stories_to_file("stories.csv", story_list)
+    return redirect("/", code=302)
 
 
 @app.route("/story/", methods=["GET", "POST"])
@@ -95,9 +97,7 @@ def add_new_story():
 def edit_story(story_id):
     if request.method == "POST":
         story_list = load_stories_from_file("stories.csv")
-        for i in range(len(story_list)):
-            if story_list[i].id == request.form["story.id"]:
-                break
+        i = get_index_from_id(story_list, story_id)
         story_list[i].title = request.form["story.title"]
         story_list[i].long_desc = request.form["story.long_desc"]
         story_list[i].accept = request.form["story.accept"]
