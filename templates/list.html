@@ -5,22 +5,23 @@
         table, th, td {
                         border: 1px solid black;
                         border-collapse: collapse;
+                        padding: 3px;
                         }
     </style>
 </head>
 
 <body>
     <p><h1> User Story manager</h1></p>
-    <p><a href="/story"><button type="button">Add new Story</button> </a></p>
+    <p><a href="/story"><button type="button" id="Add new button">Add new Story</button> </a></p>
     <table border="1">
         <col width="30">
         <col width="150">
         <col width="200">
-        <col width="200">
-        <col width="50">
-        <col width="50">
-        <col width="50">
+        <col width="250">
         <col width="80">
+        <col width="80">
+        <col width="80">
+        <col width="60">
         <tr>
             <th>ID</th>
             <th>Story Title</th>
@@ -33,13 +34,13 @@
         </tr>
         {% for story in story_list %}
         <tr>
-            <td>{{story.id}}</td>
-            <td>{{story.title}}</td>
-            <td>{{story.long_desc}}</td>
-            <td>{{story.accept}}</td>
-            <td>{{story.value}}</td>
-            <td>{{story.estim}}</td>
-            <td>{{story.status}}</td>
+            <td align="center">{{story.id}}</td>
+            <td align="center">{{story.title}}</td>
+            <td align="center">{{story.long_desc}}</td>
+            <td align="center">{{story.accept}}</td>
+            <td align="center">{{story.value}}</td>
+            <td align="center">{{story.estim}} (h)</td>
+            <td align="center">{{story.status}}</td>
             <td><a href="/story/{{story.id}}" > <img src="{{ url_for('static', filename = "Edit.png") }}" alt="Edit Story" width="25"></a>
                 <a href="/story/del@id={{story.id}}" ><img src="{{ url_for('static', filename = "Delete.png") }}" alt="Delete Story" width="25" align="right"></a>
             </td>
