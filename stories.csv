@@ -1,2 +1,3 @@
 1;Make list working;Bla-bla-blal weifuh ksdvn owrugh okv nougf RIGH ;When I am satisfied;600;2;Planning
 2;System/Handle new application;As an Administrator I want to automate the process of incoming applications. So that I can save some time;Given, that there is a new applicant, and it has no application code, when the system detects this new entry, the ensure, that the program generates a new ID for the applicant;1000;2.5;Planning
+3;Add new story;User can add new story via web;Title/Story/Acceptance criteria/Business value/Estimation (h)/Status can be saved to DB;1500;1;Review

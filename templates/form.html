@@ -6,7 +6,7 @@
 <body>
     <h1> User Story manager - {{title}}</h1>
     <form method="POST" action="/story/{{ story.id }}">
-        <p> Sory ID:<input type="text" name="story.id" value="{{ story.id }}" maxlength="5" readonly></p>
+        <p> Story ID:<input type="text" name="story.id" value="{{ story.id }}" maxlength="5" readonly></p>
         <p>Story Title<br>
         <input type="text" name="story.title" id="story.title" value="{{ story.title }}"></p>
         <p>User Story<br>

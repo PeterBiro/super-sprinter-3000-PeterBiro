@@ -45,21 +45,49 @@ def save_stories_to_file(file_name, story_list):
             file.write(row + "\n")
 
 
+def get_new_id(story_list):
+    id_list = [x.id for x in story_list]
+    return max(id_list) + 1
+
+
+def get_index_from_id(story_list, id):
+    for i in range(len(story_list)):
+        if story_list[i].id == id:
+            break
+    return i
+
+
 @app.route("/")
 @app.route("/list/")
-@app.route("/list/del@id=<int:id>")
 def list_of_stories():
     if request.method == "GET":
         story_list = load_stories_from_file("stories.csv")
         return render_template("list.html", story_list=story_list)
 
 
+@app.route("/list/del@id=<int:id>")
+def delete_story(id):
+    story_list = load_stories_from_file("stories.csv")
+
+
+
 @app.route("/story/", methods=["GET", "POST"])
 def add_new_story():
     if request.method == "POST":
-        pass
+        story_list = load_stories_from_file("stories.csv")
+        new_story = Story_class(get_new_id(story_list),
+                                request.form["story.title"],
+                                request.form["story.long_desc"],
+                                request.form["story.accept"],
+                                request.form["story.value"],
+                                request.form["story.estim"],
+                                request.form["story.status"]
+                                )
+        story_list.append(new_story)
+        save_stories_to_file("stories.csv", story_list)
+        return redirect("/", code=302)
     else:
-        story = Story_class(None, None, None, None, None, None, None)
+        story = Story_class("", "", "", "", "", "", "")
         return render_template("form.html", title="Add new Story", story=story)
 
 
